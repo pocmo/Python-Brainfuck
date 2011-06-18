@@ -10,7 +10,7 @@ import re
 import getch
 
 def execute(filename):
-  file     = open(filename, "r")
+  file = open(filename, "r")
   evaluate(file.read())
   file.close()
 
@@ -20,7 +20,7 @@ def evaluate(code):
   bracemap = buildbracemap(code)
 
   cells    = [0]
-  codeptr     = 0
+  codeptr  = 0
   cellptr  = 0
 
   while codeptr < len(code):
@@ -32,15 +32,15 @@ def evaluate(code):
 
     if command == "<":
       if cellptr <= 1: cellptr = 0
-      else: cellptr -= 1
+      else           : cellptr -= 1
 
     if command == "+":
       if cells[cellptr] < 255: cells[cellptr] += 1
-      else: cells[cellptr] = 0
+      else                   : cells[cellptr] = 0
 
     if command == "-":
       if cells[cellptr] > 0: cells[cellptr] -= 1
-      else: cells[cellptr] = 255
+      else                 : cells[cellptr] = 255
 
     if command == "[" and cells[cellptr] == 0: codeptr = bracemap[codeptr]
     if command == "]" and cells[cellptr] != 0: codeptr = bracemap[codeptr]
