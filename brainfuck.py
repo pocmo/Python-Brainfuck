@@ -19,9 +19,7 @@ def evaluate(code):
   code     = cleanup(list(code))
   bracemap = buildbracemap(code)
 
-  cells    = [0]
-  codeptr  = 0
-  cellptr  = 0
+  cells, codeptr, cellptr = [0], 0, 0
 
   while codeptr < len(code):
     command = code[codeptr]
@@ -31,16 +29,13 @@ def evaluate(code):
       if cellptr == len(cells): cells.append(0)
 
     if command == "<":
-      if cellptr <= 1: cellptr = 0
-      else           : cellptr -= 1
+      cellptr = 0 if cellptr <= 0 else cellptr - 1
 
     if command == "+":
-      if cells[cellptr] < 255: cells[cellptr] += 1
-      else                   : cells[cellptr] = 0
+      cells[cellptr] = cells[cellptr] + 1 if cells[cellptr] < 255 else 0
 
     if command == "-":
-      if cells[cellptr] > 0: cells[cellptr] -= 1
-      else                 : cells[cellptr] = 255
+      cells[cellptr] = cells[cellptr] - 1 if cells[cellptr] > 0 else 255
 
     if command == "[" and cells[cellptr] == 0: codeptr = bracemap[codeptr]
     if command == "]" and cells[cellptr] != 0: codeptr = bracemap[codeptr]
@@ -69,12 +64,8 @@ def buildbracemap(code):
 
 
 def main():
-  if len(sys.argv) == 2:
-    execute(sys.argv[1])
-  else:
-    print "Usage:", sys.argv[0], "filename"
+  if len(sys.argv) == 2: execute(sys.argv[1])
+  else: print "Usage:", sys.argv[0], "filename"
 
-
-if __name__ == "__main__":
-  main()
+if __name__ == "__main__": main()
 
