@@ -11,51 +11,43 @@ import getch
 
 def execute(filename):
   file     = open(filename, "r")
-  code     = cleanup(list(file.read()))
+  evaluate(file.read())
+  file.close()
+
+
+def evaluate(code):
+  code     = cleanup(list(code))
   bracemap = buildbracemap(code)
 
-  cells       = [0]
-  codepointer = 0
-  cellpointer = 0
+  cells    = [0]
+  codeptr     = 0
+  cellptr  = 0
 
-  while codepointer < len(code):
-    command = code[codepointer]
+  while codeptr < len(code):
+    command = code[codeptr]
 
     if command == ">":
-      cellpointer += 1
-      if cellpointer == len(cells): cells.append(0)
+      cellptr += 1
+      if cellptr == len(cells): cells.append(0)
 
     if command == "<":
-      if cellpointer <= 1: cellpointer = 0
-      else: cellpointer -= 1
+      if cellptr <= 1: cellptr = 0
+      else: cellptr -= 1
 
     if command == "+":
-      if cells[cellpointer] < 255:
-        cells[cellpointer] += 1
-      else:
-        cells[cellpointer] = 0
+      if cells[cellptr] < 255: cells[cellptr] += 1
+      else: cells[cellptr] = 0
 
     if command == "-":
-      if cells[cellpointer] > 0:
-        cells[cellpointer] -= 1
-      else:
-        cells[cellpointer] = 255
+      if cells[cellptr] > 0: cells[cellptr] -= 1
+      else: cells[cellptr] = 255
 
-    if command == "[":
-      if cells[cellpointer] == 0:
-        codepointer = bracemap[codepointer]
-
-    if command == "]":
-      if cells[cellpointer] != 0:
-        codepointer = bracemap[codepointer]
-
-    if command == ".":
-      sys.stdout.write(chr(cells[cellpointer]))
-
-    if command == ",":
-      cells[cellpointer] = ord(getch.getch())
+    if command == "[" and cells[cellptr] == 0: codeptr = bracemap[codeptr]
+    if command == "]" and cells[cellptr] != 0: codeptr = bracemap[codeptr]
+    if command == ".": sys.stdout.write(chr(cells[cellptr]))
+    if command == ",": cells[cellptr] = ord(getch.getch())
       
-    codepointer += 1
+    codeptr += 1
 
 
 def cleanup(code):
@@ -73,7 +65,6 @@ def buildbracemap(code):
       start = temp_bracestack.pop()
       bracemap[start] = position
       bracemap[position] = start
-
   return bracemap
 
 
