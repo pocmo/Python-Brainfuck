@@ -9,9 +9,9 @@ import sys
 import getch
 
 def execute(filename):
-  file = open(filename, "r")
-  evaluate(file.read())
-  file.close()
+  f = open(filename, "r")
+  evaluate(f.read())
+  f.close()
 
 
 def evaluate(code):
