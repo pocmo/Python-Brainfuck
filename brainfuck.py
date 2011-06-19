@@ -6,7 +6,6 @@
 # Usage: ./brainfuck.py [FILE]
 
 import sys
-import re
 import getch
 
 def execute(filename):
