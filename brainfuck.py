@@ -49,8 +49,7 @@ def cleanup(code):
 
 
 def buildbracemap(code):
-  temp_bracestack = []
-  bracemap        = {}
+  temp_bracestack, bracemap = [], {}
 
   for position, command in enumerate(code):
     if command == "[": temp_bracestack.append(position)
