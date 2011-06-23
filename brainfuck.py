@@ -52,8 +52,7 @@ def buildbracemap(code):
   temp_bracestack = []
   bracemap        = {}
 
-  for position in range(len(code)):
-    command = code[position]
+  for position, command in enumerate(code):
     if command == "[": temp_bracestack.append(position)
     if command == "]":
       start = temp_bracestack.pop()
