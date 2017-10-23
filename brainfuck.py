@@ -45,7 +45,7 @@ def evaluate(code):
 
 
 def cleanup(code):
-  return filter(lambda x: x in ['.', ',', '[', ']', '<', '>', '+', '-'], code)
+  return ''.join(filter(lambda x: x in ['.', ',', '[', ']', '<', '>', '+', '-'], code))
 
 
 def buildbracemap(code):
@@ -62,7 +62,7 @@ def buildbracemap(code):
 
 def main():
   if len(sys.argv) == 2: execute(sys.argv[1])
-  else: print "Usage:", sys.argv[0], "filename"
+  else: print("Usage:", sys.argv[0], "filename")
 
 if __name__ == "__main__": main()
 
