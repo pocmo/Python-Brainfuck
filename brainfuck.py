@@ -17,10 +17,11 @@ def execute(filename):
 def evaluate(code):
   code     = cleanup(list(code))
   bracemap = buildbracemap(code)
+  len_code = len(code)
 
   cells, codeptr, cellptr = [0], 0, 0
 
-  while codeptr < len(code):
+  while codeptr < len_code:
     command = code[codeptr]
 
     if command == ">":
