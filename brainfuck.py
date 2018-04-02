@@ -17,10 +17,11 @@ def execute(filename):
 def evaluate(code):
   code     = cleanup(list(code))
   bracemap = buildbracemap(code)
+  len_code = len(code)
 
   cells, codeptr, cellptr = [0], 0, 0
 
-  while codeptr < len(code):
+  while codeptr < len_code:
     command = code[codeptr]
 
     if command == ">":
@@ -54,9 +55,16 @@ def buildbracemap(code):
   for position, command in enumerate(code):
     if command == "[": temp_bracestack.append(position)
     if command == "]":
-      start = temp_bracestack.pop()
-      bracemap[start] = position
-      bracemap[position] = start
+      if len(temp_bracestack) > 0: # error handling
+        start = temp_bracestack.pop()
+        bracemap[start] = position
+        bracemap[position] = start
+      else:
+        sys.stdout.write("error: missing [\n")
+        sys.exit(1)
+  if len(temp_bracestack) > 0: # error handling
+        sys.stdout.write("error: missing ]\n")
+        sys.exit(1)
   return bracemap
 
 
