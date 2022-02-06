@@ -4,15 +4,17 @@ Usage:
  ./brainfuck.py yourcode.bf
 
 You can use it as a module as well:
-  import brainfuck
+```python
+import brainfuck
 
-  sourcecode = """
-    ++++++++++[>+++++++>++++++++++>+++>+<<<<-]
-    >++.>+.+++++++..+++.>++.<<+++++++++++++++.
-    >.+++.------.--------.>+.>.
-  """
+sourcecode = """
+++++++++++[>+++++++>++++++++++>+++>+<<<<-]
+>++.>+.+++++++..+++.>++.<<+++++++++++++++.
+>.+++.------.--------.>+.>.
+"""
 
-  brainfuck.evaluate(sourcecode)
+brainfuck.evaluate(sourcecode)
+```
 
 http://en.wikipedia.org/wiki/Brainfuck
 
