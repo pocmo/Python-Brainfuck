@@ -1,18 +1,22 @@
 This is just a small Brainfuck interpreter written in Python.
 
 Usage:
- ./brainfuck.py yourcode.bf
+```batch
+python brainfuck.py yourcode.bf
+```
 
 You can use it as a module as well:
-  import brainfuck
+```python
+import brainfuck
 
-  sourcecode = """
-    ++++++++++[>+++++++>++++++++++>+++>+<<<<-]
-    >++.>+.+++++++..+++.>++.<<+++++++++++++++.
-    >.+++.------.--------.>+.>.
-  """
+sourcecode = """
+++++++++++[>+++++++>++++++++++>+++>+<<<<-]
+>++.>+.+++++++..+++.>++.<<+++++++++++++++.
+>.+++.------.--------.>+.>.
+"""
 
-  brainfuck.evaluate(sourcecode)
+brainfuck.evaluate(sourcecode)
+```
 
 http://en.wikipedia.org/wiki/Brainfuck
 
